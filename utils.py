@@ -47,5 +47,12 @@ def speak_text(text):
 def handle_call_event(event_data):
     print(f"Call started: {event_data}")
 
+from flask import Response
+
 def process_audio_stream(request):
-    return Response("Audio stream placeholder", mimetype="text/plain")
+    event = request.json
+    print("Streaming event received:", event)
+
+    # Respond with OK so Telnyx knows we're listening
+    return Response("OK", status=200)
+
