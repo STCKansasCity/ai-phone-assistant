@@ -1,6 +1,10 @@
 # app.py
+import os
 from flask import Flask, request, jsonify
 from utils import process_audio_stream, handle_call_event
+
+# Set Google Cloud credentials explicitly
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google-credentials.json"
 
 app = Flask(__name__)
 
@@ -12,7 +16,6 @@ def telnyx_call():
     <Record />
 </Response>"""
     return bxml, 200, {'Content-Type': 'application/xml'}
-
 
 @app.route("/telnyx/stream", methods=["GET", "POST"])
 def telnyx_stream():
